@@ -1,0 +1,32 @@
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
+</head>
+<body>
+<br>
+<form action="" method="post">
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-6">
+	{% csrf_token %}
+	{{form.as_p}}
+
+
+ <input type="submit" class="btn btn-success" value="OK" />
+ <a href="/login/home">
+<input type="button" class="btn btn-success" value="HOME" /> </a>
+</div></div>
+</form>
+
+
+
+
+</body>
+</html>

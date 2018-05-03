@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
+</head>
+<body>
+<h1>ADD ANSWER 
+
+ </h1>
+<br>
+
+<form  action="" method="post">{% csrf_token %}
+<div class="row">
+	<div class="col-sm-4"></div>
+	<div class="col-sm-6 ">
+	<h3>{{question}}</h3>
+	<label>Enter Your Answer Here</label>
+	  <textarea class="form-control" rows="5" id="comment" name="txta"></textarea>
+<br>
+<input type="submit" class="btn btn-success" value="ADD ANSWER" />
+</form>
+
+
+<a href="/login/home">
+<input type="button" class="btn btn-success" value="HOME" /> </a></center>
+</body>
+</html>

@@ -1,0 +1,96 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
+</head>
+<body>
+<h1>WELCOME :
+
+{%for i in st3%}
+			 
+		{{i}}
+	{%endfor%}  </h1>
+<br>
+
+	<h1>What is your question? <h1>
+<h4>
+*How to quickly get a good answer:<br>
+
+--->Keep your question short and to the point<br>
+--->Check for grammar or spelling errors<br>
+--->Phrase it like a question <h4><br>
+<form action="" method="post">{% csrf_token %}
+
+	<div class="form-group">
+  		<label>Start your question with 'What','How','Why',etc</label>
+
+  		{{form.as_p}}
+
+
+
+	</div>
+	<button type="submit" class="btn btn-success">Add Question</button>
+
+</form>
+ <center>
+<h1>QUESTIONS</h1>
+<h3>
+
+
+ <table class="table">
+    <thead>
+      <tr>
+        <th>QUEST NO</th>
+        <th>QUESTIONS</th>
+        <th>USER</th>
+
+       
+      </tr>
+    </thead>
+    <tbody>
+        
+      <tr class="default">
+        <td>{%for i in st11%}
+			 
+		{{i}}
+		<br><br>
+	{%endfor%}</td> 
+	
+        <td>{%for i in qst%} 
+			 {{i.id}}
+		<a href="{% url 'login:questiondetail' qid=i.id %}">{{i}}</a>
+		<br><br>
+	{%endfor%}</td>
+
+	       <td>{%for i in st10%}
+			 
+		{{i}}
+		<br><br>
+	{%endfor%}</td>
+	
+        
+
+	
+        
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+
+<a href="/login/home">
+<input type="button" class="btn btn-success" value="HOME" /> </a></center>
+</body>
+</html>
