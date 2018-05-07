@@ -1,0 +1,84 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>admin</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
+</head>
+<body>
+<h1>ADMIN</h1>
+
+
+<h2>ANSWERS</h2>
+
+<table class="table">
+    <thead>
+      <tr>
+      	  <th>ANSWER ID</th>
+        <th>ANSWER</th>
+        <th>STATUS</th>
+         <th>QUEST ID</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+      <tr class="default">
+      	 <td>{%for i in st10%}
+			 
+		{{i}}
+		<br><br>
+	{%endfor%}</td> 
+
+        <td>{%for i in st11%}
+			 
+		{{i}}
+		<br><br>
+	{%endfor%}</td> 
+	<td>{%for i in st12%}
+			 
+		{{i}}
+		<br><br>
+	{%endfor%}</td> 
+
+	  <td>{%for i in st13%}
+			 
+		{{i}}
+		<br><br>
+	{%endfor%}</td> 
+	
+
+
+	
+        
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+
+
+<form  action="" method="post">{% csrf_token %}
+
+	<div class="form-group">
+  		<label>Enter the answer id to approve an answer </label>
+  		<!-- <textarea class="form-control" rows="5" id="comment1" name="comment"></textarea> -->
+  		<input class="form-control" type="number" name="statans">
+	</div>
+	<button type="submit" class="btn btn-success">Approve Answer</button>
+</form>
+
+
+
+
+
+<br>
+ <a href="/login/home">
+<input type="button" class="btn btn-success" value="HOME" /> </a>
+</body>
+</html>

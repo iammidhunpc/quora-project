@@ -1,0 +1,81 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
+</head>
+<body>
+<h1>WELCOME :
+
+{%for i in st3%}
+			 
+		{{i}}
+	{%endfor%}  </h1>
+<br>
+
+	<h1>What is your question? <h1>
+<h4>
+*How to quickly get a good answer:<br>
+
+--->Keep your question short and to the point<br>
+--->Check for grammar or spelling errors<br>
+--->Phrase it like a question <h4><br>
+<form action="" method="post">{% csrf_token %}
+
+	<div class="form-group">
+  		<label>Start your question with 'What','How','Why',etc</label>
+
+  		{{form.as_p}}
+
+
+
+	</div>
+	<button type="submit" class="btn btn-success">Add Question</button>
+
+</form>
+
+<h1>Click on a question for answer it -></h1>
+<h3>
+ <center>
+
+ 
+      {%for i in questions%}  
+			 
+		<a href="{% url 'login:questiondetail' qid=i.id %}">{{i.question}}</a>
+		<br><br>
+	{%endfor%}
+
+
+<br>
+	{% for question in questions %}
+		
+		{% for answ in answers %}
+			
+			{% if answ.questid == question.id|stringformat:"s" %}
+			
+			 	 <div class="panel panel-success">
+     			 <div class="panel-heading">
+     			<a href="{% url 'login:questiondetail' qid=question.id %}">{{question}}</a>
+		<br><br>
+
+     			 </div>
+      			<div class="panel-body">{{answ}}</div>
+   				 </div>
+
+
+			{% endif %}
+
+		{% endfor %}
+	{% endfor %}
+        
+<a href="/login/home">
+<input type="button" class="btn btn-success" value="HOME" /> </a></center>
+
+
+</body>
+</html>

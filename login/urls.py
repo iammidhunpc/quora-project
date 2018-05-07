@@ -13,5 +13,12 @@ urlpatterns = [
     path('admin', views.AdminView.as_view(), name="admin"),
     path('question_detail/<int:qid>/', views.AnswerView.as_view(), name="questiondetail"),
 
+    path('answer_detail/<int:aid>/', views.CommentView.as_view(), name="answerdetail"),
+
+    path('delete_detail/<int:did>/', views.SuccessView.as_view(), name="deletedetail"),
+    path('deleteans_detail/<int:daid>/', views.DeleteansView.as_view(), name="deleteansdetail"),
+
+    path('questap', views.QuestapView.as_view(), name="questap"),
+    path('ansap', views.AnsapView.as_view(), name="ansap"),
 
 ]

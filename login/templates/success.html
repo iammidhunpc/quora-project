@@ -1,96 +1,215 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
-<head>
-	<title></title>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
-</head>
-<body>
-<h1>WELCOME :
+<html lang="en">
 
-{%for i in st3%}
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quora</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'login/shop-item.css' %}"/>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/login/home">QUORA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/login/home">Home
+
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+                        <li class="nav-item">
+              <a class="nav-link" href="/login/success">Add Question</a>
+            </li>
+           
+             <li class="nav-item">
+              <a class="nav-link" href="/login/log">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-3">
+          <h1 class="my-4">Welcome {%for i in st3%}
 			 
-		{{i}}
-	{%endfor%}  </h1>
-<br>
-
-	<h1>What is your question? <h1>
-<h4>
-*How to quickly get a good answer:<br>
-
---->Keep your question short and to the point<br>
---->Check for grammar or spelling errors<br>
---->Phrase it like a question <h4><br>
-<form action="" method="post">{% csrf_token %}
-
-	<div class="form-group">
-  		<label>Start your question with 'What','How','Why',etc</label>
-
-  		{{form.as_p}}
-
-
-
-	</div>
-	<button type="submit" class="btn btn-success">Add Question</button>
-
-</form>
- <center>
-<h1>QUESTIONS</h1>
-<h3>
-
-
- <table class="table">
-    <thead>
-      <tr>
-        <th>QUEST NO</th>
-        <th>QUESTIONS</th>
-        <th>USER</th>
-
-       
-      </tr>
-    </thead>
-    <tbody>
-        
-      <tr class="default">
-        <td>{%for i in st11%}
+		      {{i}}
+	           {%endfor%} </h1>
+        <div class="list-group">   <p>Users Questions:</p>
+                 {%for i in questions%}  
 			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
-	
-        <td>{%for i in qst%} 
-			 {{i.id}}
-		<a href="{% url 'login:questiondetail' qid=i.id %}">{{i}}</a>
-		<br><br>
-	{%endfor%}</td>
+		        <a href="{% url 'login:questiondetail' qid=i.id %}"> {{i.question}}
+	           	<br>
+	               {%endfor%}   </a>
+<!--             <a href="#" class="list-group-item">Category 2</a>
+            <a href="#" class="list-group-item">Category 3</a> -->
+        </div>
+    </div>
+        <!-- /.col-lg-3 -->
 
-	       <td>{%for i in st10%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td>
-	
-        
+    <div class="col-lg-9">
 
-	
-        
-      </tr>
+      <div class="card mt-4">
+          
+        <div class="card-body">
+                          <h3 class="card-title">What is your question?</h3>
+
+                       <p class="card-text">  <form action="" method="post">{% csrf_token %}
+
+            <div class="form-group">
+                    		<label>Start your question with 'What','How','Why',etc</label>
+
+                    		<input class="form-control" type="text" name="ques">
+
+
+
+	           </div>
+	                     <button type="submit" class="btn btn-success">Add Question</button>
+
+                      </form></p>
+             
+        </div>
+      </div>
+
+
+
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+
       
-    </tbody>
-  </table>
+          <!-- /.card -->
+            {% for question in questions %}
+      <div class="card card-outline-secondary my-4">
+        <div class="card-header">
+        
+
+            <div class="">
+                   <h3> <a href="{% url 'login:questiondetail' qid=question.id %}">{{question}}</a></h3>
+
+                      <a class="text-muted" href="{% url 'login:deletedetail' did=question.id %}">delete</a>
+            </div>
+        </div>
+      </div>                         
+		             {% for answer in answers %}
 
 
 
+          {% if answer.questid == question.id|stringformat:"s"%}
+
+        <div class="my-4">
+          <div class="card-header">
+        
+
+              <div class="card-body">
+
+                 <h5>{{answer}}</h5>
 
 
+               
 
 
+                  <a class="text-muted" href="{% url 'login:deleteansdetail' daid=answer.id %}">delete answer</a>
 
-<a href="/login/home">
-<input type="button" class="btn btn-success" value="HOME" /> </a></center>
-</body>
+                    <br>
+               
+                     <small class="text-muted">Posted by   
+
+                       {%for user in users%}
+                        {% if question.logid == user.id|stringformat:"s" %}
+                            {{user.name}}
+                     
+                            {% endif%}
+                      {% endfor %}
+                     </small>
+
+
+   
+
+                   
+                    <br>
+
+                     <a href="{% url 'login:answerdetail' aid=answer.id %}" class="btn btn-success">Leave a Comment</a> <br><br>
+
+
+              
+                     {% for comment in comments %} 
+
+
+           				{% if comment.ansid == answer.id|stringformat:"s" %}
+
+
+                        		<small>{{comment}}</small><br>
+                         
+                              <small class="text-muted">Commented by {{question.logid}}</small><br>
+                        {% endif %} 
+
+          					 
+          			    {% endfor %}  
+
+            </div>     
+
+          </div>
+        </div> 
+          <!-- </div> -->
+                                <!-- /.card -->
+                                {% endif %}
+
+                      	{% endfor %}  {% endfor %}  
+
+        <!-- </div> -->
+        <!-- /.col-lg-9 -->
+
+     <!--  </div> -->
+
+    </div>
+    <!-- /.container -->
+
+
+  <div>	
+       
+
+</div>
+
+<br><br><br><br><br><br><br><br><br><br>
+
+
+    <!-- Footer -->
+<!--     <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+
+    </footer>
+ -->
+
+  </body>
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script> -->
+
 </html>
