@@ -10,6 +10,12 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.hashers import make_password
+
+
+from django import template
+from django.template import loader
+
+
 class IndexView(FormView):
     form_class = NameForm
     template_name = 'reg.html'
@@ -249,23 +255,57 @@ class CommentView(FormView):
 class DeleteView(generic.TemplateView):
     template_name = 'success.html'
     success_url='/login/success'
-    def get_context_data(self, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         context = super(DeleteView,self).get_context_data(**kwargs)
         did = self.kwargs['did']
         q_obj = Quest.objects.filter(id=did)
         q_obj.delete()
-
-    # def get_success_url(self, **kwargs):         
-    #     return reverse_lazy('delete_detail', kwargs = {'pk': self.kwargs['did']})
-
-        
+        return HttpResponseRedirect('/login/success')
 class DeleteansView(generic.TemplateView):
-	template_name = 'success.html'
-	#success_url='/login/success'
-	def get_context_data(self, *args, **kwargs):
-		context = super(DeleteansView,self).get_context_data(**kwargs)
-		daid = self.kwargs['daid']
-		q_obj = Ans.objects.filter(id=daid)
-		q_obj.delete()
+    template_name = 'success.html'
+    success_url='/login/success'
+    def dispatch(self, request, *args, **kwargs):
+        context = super(DeleteansView,self).get_context_data(**kwargs)
+        daid = self.kwargs['daid']
+        q_obj = Ans.objects.filter(id=daid)
+        q_obj.delete()
+        return HttpResponseRedirect('/login/success')
 
+# register = template.Library()
 
+# @register.inclusion_tag('pagination.html')
+# def end_pagination(page, begin_pages=2, end_pages=2, before_current_pages=4, after_current_pages=4):
+
+#     before = max(page.number - before_current_pages - 1, 0)
+#     after = page.number + after_current_pages
+
+#     begin = page.paginator.page_range[:begin_pages]
+#     middle = page.paginator.page_range[before:after]
+#     end = page.paginator.page_range[-end_pages:]
+#     last_page_number = end[-1]
+
+#     def collides(firstlist, secondlist):
+   
+#         return any(item in secondlist for item in firstlist)
+
+    
+#     if collides(middle, end):
+#         end = range(max(last_page_number - before_current_pages - after_current_pages, 1), last_page_number + 1) #noqa
+#         middle = []
+
+  
+#     if collides(begin, middle):
+#         begin = range(1, min(before_current_pages + after_current_pages, last_page_number) + 1) #noqa
+#         middle = []
+
+ 
+#     if collides(begin, end):
+#         begin = range(1, last_page_number + 1)
+#         end = []
+
+#     return {
+#             'page': page,
+#             'begin': begin,
+#             'middle': middle,
+#             'end': end
+#            }

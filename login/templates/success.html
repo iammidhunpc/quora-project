@@ -61,7 +61,7 @@
         <div class="list-group">   <p>Users Questions:</p>
                  {%for i in questions%}  
 			 
-		        <a href="{% url 'login:questiondetail' qid=i.id %}"> {{i.question}}
+		        <a href="{% url 'login:questiondetail' qid=i.id %}"> <b>{{i.question}}</b>
 	           	<br>
 	               {%endfor%}   </a>
 <!--             <a href="#" class="list-group-item">Category 2</a>
@@ -75,7 +75,7 @@
       <div class="card mt-4">
           
         <div class="card-body">
-                          <h3 class="card-title">What is your question?</h3>
+                          <h3 class="card-title"><b>What is your question?</b></h3>
 
                        <p class="card-text">  <form action="" method="post">{% csrf_token %}
 
@@ -108,7 +108,7 @@
         
 
             <div class="">
-                   <h3> <a href="{% url 'login:questiondetail' qid=question.id %}">Q. {{question}}</a></h3>
+                   <h3> <a href="{% url 'login:questiondetail' qid=question.id %}"> <b>Q. {{question}}</a></b></h3>
 
                      
                         
@@ -207,6 +207,94 @@
        
 
 </div>
+
+
+
+
+
+
+
+<!-- {% load i18n %}
+<div class="row">
+  <div class="col-xs-12">
+    <section class="paginator text-center">
+      <nav>
+        <ul class="pagination">
+
+          <li>
+            {% if page.has_previous %}
+              <a href="?page={{ page.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true"><i class="icon icon-chevron-left"> Anterior</i></span>
+              </a>
+            {% endif %}
+          </li>
+
+          {% for page_num in begin %}
+            {% ifequal page.number page_num %}
+            <li class="active">
+              <a href="?page={{ page_num }}">{{ page_num }}</a>
+            </li>
+            {% else %}
+            <li>
+              <a href="?page={{ page_num }}">{{ page_num }}</a>
+            </li>
+            {% endifequal %}
+          {% endfor %}
+
+          {% if middle %}
+            <li>
+              <a>..ghghf.</a>
+            </li>
+            {% for page_num in middle %}
+              {% ifequal page.number page_num %}
+                <li class="active">
+                  <a href="?page={{ page_num }}">{{ page_num }}</a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="?page={{ page_num }}">{{ page_num }}</a>
+                </li>
+              {% endifequal %}
+            {% endfor %}
+          {% endif %}
+
+          {% if end %} 
+            <li>
+              <a>...gfdg</a>
+            </li>
+            {% for page_num in end %}
+              {% ifequal page.number page_num %}
+                <li class="active">
+                  <a href="?page={{ page_num }}">{{ page_num }}</a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="?page={{ page_num }}">{{ page_num }}</a>
+                </li>
+              {% endifequal %}
+            {% endfor %}
+          {% endif %} 
+
+          <li>
+            {% if page.has_next %}
+              <a href="?page={{ page.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">Siguiente <i class="icon icon-chevron-right"></i></span>
+              </a>
+            {% endif %}
+          </li>
+
+        </ul>
+      </nav>
+    </section>
+  </div>
+</div>
+ -->
+
+
+
+
+
+
 
 <br><br><br><br><br><br><br><br><br><br>
 

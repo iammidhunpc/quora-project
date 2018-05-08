@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('answer_detail/<int:aid>/', views.CommentView.as_view(), name="answerdetail"),
 
-    path('delete_detail/<int:did>/', views.SuccessView.as_view(), name="deletedetail"),
+    path('delete_detail/<int:did>/', views.DeleteView.as_view(), name="deletedetail"),
     path('deleteans_detail/<int:daid>/', views.DeleteansView.as_view(), name="deleteansdetail"),
 
     path('questap', views.QuestapView.as_view(), name="questap"),
