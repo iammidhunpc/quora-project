@@ -1,20 +1,82 @@
-{% load staticfiles %}
 
+
+
+
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
 
-	<title>admin</title>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}"/>
-</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quora</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'login/shop-item.css' %}"/>
+  </head>
+
 <body>
-<h1>ADMIN</h1>
+<br><br><br><br>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="/login/home">QUORA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="/login/home">Login
+
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+                        <li class="nav-item ">
+              <a class="nav-link" href="/login/index">Registration</a>
+            </li>
+               <li class="nav-item">
+              <a class="nav-link" href="/login/display">User Profiles</a>
+            </li>
 
 
-<h2>ANSWERS</h2>
+
+             <li class="nav-item active">
+              <a class="nav-link" href="/login/admin">Admin</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+  
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+          <div class="card mt-4">
+          
+            <div class="card-body">
+             	
+				        
+						<h1>ADMIN</h1> <hr>
+				
 
 <table class="table">
     <thead>
@@ -60,25 +122,62 @@
     </tbody>
   </table>
 
+<table class="table">
+    <thead>
+      <tr>
+      	  <th>QUEST ID</th>
+        <th>QUESTION</th>
+ 
+      </tr>
+    </thead>
+    <tbody>
+        
+      <tr class="default">
+
+
+        <td>{%for i in st15%}
+			 
+		{{i}}
+		<br><br>
+	{%endfor%}</td> 
+
+	  <td>{%for i in st14%}
+			 
+		{{i}}
+		<br><br>
+	{%endfor%}</td> 
+	
+
+
+	
+        
+      </tr>
+      
+    </tbody>
+  </table>
+
+
+			<form  action="" method="post">{% csrf_token %}
+
+				<div class="form-group">
+			  		<label>Enter the answer id to approve an answer : </label>
+			  		<!-- <textarea class="form-control" rows="5" id="comment1" name="comment"></textarea> -->
+			  		<input class="form-control" type="number" name="statans">
+				</div>
+				<button type="submit" class="btn btn-success">Approve Answer</button>
+			</form>
 
 
 
-<form  action="" method="post">{% csrf_token %}
-
-	<div class="form-group">
-  		<label>Enter the answer id to approve an answer </label>
-  		<!-- <textarea class="form-control" rows="5" id="comment1" name="comment"></textarea> -->
-  		<input class="form-control" type="number" name="statans">
-	</div>
-	<button type="submit" class="btn btn-success">Approve Answer</button>
-</form>
 
 
+				             
+				            </div>
+				          </div>
+				        </div>
+				    </div>
+				    </div>
+				<br><br>
 
 
-
-<br>
- <a href="/login/home">
-<input type="button" class="btn btn-success" value="HOME" /> </a>
-</body>
 </html>

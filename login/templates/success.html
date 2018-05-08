@@ -44,7 +44,7 @@
             </li>
            
              <li class="nav-item">
-              <a class="nav-link" href="/login/log">Logout</a>
+              <a class="nav-link" href="/login/logout">Logout</a>
             </li>
           </ul>
         </div>
@@ -57,10 +57,7 @@
   <div class="row">
 
     <div class="col-lg-3">
-          <h1 class="my-4">Welcome {%for i in st3%}
-			 
-		      {{i}}
-	           {%endfor%} </h1>
+          <h1 class="my-4"> Welcome  {{request.user.username}}  </h1>
         <div class="list-group">   <p>Users Questions:</p>
                  {%for i in questions%}  
 			 
@@ -111,9 +108,16 @@
         
 
             <div class="">
-                   <h3> <a href="{% url 'login:questiondetail' qid=question.id %}">{{question}}</a></h3>
+                   <h3> <a href="{% url 'login:questiondetail' qid=question.id %}">Q. {{question}}</a></h3>
 
-                      <a class="text-muted" href="{% url 'login:deletedetail' did=question.id %}">delete</a>
+                     
+                        
+                            <small class="text-muted">Posted by   
+                        {{question.users}} <br>
+                         <a class="text-muted" href="{% url 'login:deletedetail' did=question.id %}">delete</a>
+ 
+                     </small>
+
             </div>
         </div>
       </div>                         
@@ -130,33 +134,33 @@
               <div class="card-body">
 
                  <h5>{{answer}}</h5>
-
+                      <small class="text-muted">Posted by   
+                        {{answer.users}}
+ 
+                     </small>
 
                
-
+                     <br> 
 
                   <a class="text-muted" href="{% url 'login:deleteansdetail' daid=answer.id %}">delete answer</a>
 
                     <br>
                
-                     <small class="text-muted">Posted by   
 
-                       {%for user in users%}
-                        {% if question.logid == user.id|stringformat:"s" %}
-                            {{user.name}}
-                     
-                            {% endif%}
-                      {% endfor %}
-                     </small>
 
 
    
 
                    
                     <br>
+                            <div class="my-4">
+                     <div class="card-header">
+        
 
-                     <a href="{% url 'login:answerdetail' aid=answer.id %}" class="btn btn-success">Leave a Comment</a> <br><br>
+              <div class="card-body">
 
+
+                     
 
               
                      {% for comment in comments %} 
@@ -167,11 +171,18 @@
 
                         		<small>{{comment}}</small><br>
                          
-                              <small class="text-muted">Commented by {{question.logid}}</small><br>
+                              <small class="text-muted">Commented by {{comment.users}}</small><br>
                         {% endif %} 
 
           					 
           			    {% endfor %}  
+
+                    <br>
+                    <a href="{% url 'login:answerdetail' aid=answer.id %}" class="btn btn-success">Leave a Comment</a> <br><br>
+
+
+
+                    </div></div></div>
 
             </div>     
 

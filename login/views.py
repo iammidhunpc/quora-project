@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import make_password
 class IndexView(FormView):
     form_class = NameForm
     template_name = 'reg.html'
@@ -48,7 +49,7 @@ class LogView(FormView):
         obj1=Logs.objects.create(name=nam1)
         obj1.save()
 
-        user = authenticate(name=nam1, password=sid1)
+        user = authenticate(username=nam1, password=sid1)
         print(nam1)
         print(sid1)
         print(user)
@@ -100,7 +101,7 @@ class SuccessView(FormView):
             logids=i.id
         
         q1=form.cleaned_data['ques']
-        obj1=Quest.objects.create(logid=logids,status=0,question=q1)
+        obj1=Quest.objects.create(logid=logids,status=0,question=q1,users=self.request.user.username)
         messages.add_message(self.request, messages.WARNING, 'your question is pending moderation from the admin !')
         return super(SuccessView,self).form_valid(form)  
 
@@ -129,10 +130,7 @@ class QuestapView(FormView):
      	st6=[]
      	st7=[]
      	st8=[]
-     	st10=[]
-     	st11=[]
-     	st12=[]
-     	st13=[]
+
      	obj=Quest.objects.all()
      	for j in obj:
      		st5.append(j.question)
@@ -158,23 +156,30 @@ class AnsapView(FormView):
     form_class = AnsstatForm
     success_url='ansap'
     def get_context_data(self, **kwargs):
-     	context = super(AnsapView, self).get_context_data(**kwargs)
-
-     	st10=[]
-     	st11=[]
-     	st12=[]
-     	st13=[]
-     	obj1=Ans.objects.all()
-     	for i in obj1:
-     	 	st10.append(i.id)
-     	 	st11.append(i.answer)
-     	 	st12.append(i.status)
-     	 	st13.append(i.questid)
-     	 	context['st10'] = st10
-     	 	context['st11'] = st11
-     	 	context['st12'] = st12
-     	 	context['st13'] = st13
-     	return context
+        context = super(AnsapView, self).get_context_data(**kwargs)
+        st10=[]
+        st11=[]
+        st12=[]
+        st13=[]
+        st14=[]
+        st15=[]
+        obj1=Ans.objects.all()
+        obj=Quest.objects.all()
+        for i in obj1:
+            st10.append(i.id)
+            st11.append(i.answer)
+            st12.append(i.status)
+            st13.append(i.questid)
+            context['st10'] = st10
+            context['st11'] = st11
+            context['st12'] = st12
+            context['st13'] = st13
+        for j in obj:
+            st14.append(j.question)
+            st15.append(j.id)
+            context['st14'] = st14
+            context['st15'] = st15
+        return context
     def form_valid(self, form):
 
     	ans1 = form.cleaned_data['statans']
@@ -205,7 +210,8 @@ class AnswerView(FormView):
         answ1 = form.cleaned_data['txta']
 
         tmp = self.kwargs['qid']
-        obj4=Ans.objects.create(answer=answ1,status=0,questid=tmp)
+        # import pdb;pdb.set_trace()
+        obj4=Ans.objects.create(answer=answ1,status=0,questid=tmp,users=self.request.user.username)
         obj4.save()
         messages.add_message(self.request, messages.WARNING, 'your answer is pending modaration from the admin !')
         return super(AnswerView,self).form_valid(form)
@@ -227,7 +233,7 @@ class CommentView(FormView):
        comment1 = form.cleaned_data['txtc']
 
        tmp1 = self.kwargs['aid']
-       obj5=Comm.objects.create(comment=comment1,ansid=tmp1)
+       obj5=Comm.objects.create(comment=comment1,ansid=tmp1,users=self.request.user.username)
        obj5.save()
        return super(CommentView,self).form_valid(form)
 # class DeleteView(generic.TemplateView):

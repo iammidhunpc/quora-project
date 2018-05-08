@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from django.conf.urls import url
 from . import views
 app_name = 'login'
@@ -20,5 +21,11 @@ urlpatterns = [
 
     path('questap', views.QuestapView.as_view(), name="questap"),
     path('ansap', views.AnsapView.as_view(), name="ansap"),
+
+
+
+    path('logout/', auth_views.LogoutView.as_view(next_page='/login/log'), name='logout'),
+
+
 
 ]
