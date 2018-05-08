@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'register.urls'
+ROOT_URLCONF = 'quora.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'register.wsgi.application'
+WSGI_APPLICATION = 'quora.wsgi.application'
 
 
 # Database

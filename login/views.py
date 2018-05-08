@@ -63,10 +63,11 @@ class LogView(FormView):
                  #   else:
                   #      return HttpResponseRedirect('failed')
             else:
-                return HttpResponse("Enter valid details")
+                return HttpResponseRedirect('/login/log')
         else:
+            messages.add_message(self.request, messages.WARNING, 'Invalid username or password !')
         # Bad login details were provided. So we can't log the user in.
-            return HttpResponse("try again")
+            return HttpResponseRedirect('/login/log')
 
 
 
