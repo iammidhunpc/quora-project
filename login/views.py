@@ -13,7 +13,7 @@ from django.contrib.auth.hashers import make_password
 class IndexView(FormView):
     form_class = NameForm
     template_name = 'reg.html'
-    success_url='display'
+    success_url='log'
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.password = make_password( obj.password )
@@ -93,7 +93,7 @@ class SuccessView(FormView):
         for i in obj:
             st3.append(i.name)
             context['st3'] = st3
-            return context
+        return context
 
     def form_valid(self, form):
         ob9=Logs.objects.all()
@@ -169,16 +169,12 @@ class AnsapView(FormView):
             st10.append(i.id)
             st11.append(i.answer)
             st12.append(i.status)
-            st13.append(i.questid)
+            st13.append(i.ques)
             context['st10'] = st10
             context['st11'] = st11
             context['st12'] = st12
             context['st13'] = st13
-        for j in obj:
-            st14.append(j.question)
-            st15.append(j.id)
-            context['st14'] = st14
-            context['st15'] = st15
+ 
         return context
     def form_valid(self, form):
 
@@ -211,7 +207,10 @@ class AnswerView(FormView):
 
         tmp = self.kwargs['qid']
         # import pdb;pdb.set_trace()
-        obj4=Ans.objects.create(answer=answ1,status=0,questid=tmp,users=self.request.user.username)
+        int(tmp)
+        qqobj = Quest.objects.get(id=tmp)
+
+        obj4=Ans.objects.create(answer=answ1,status=0,ques=str(qqobj),questid=tmp,users=self.request.user.username)
         obj4.save()
         messages.add_message(self.request, messages.WARNING, 'your answer is pending modaration from the admin !')
         return super(AnswerView,self).form_valid(form)

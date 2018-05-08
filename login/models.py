@@ -28,6 +28,7 @@ class Ans(models.Model):
     users=models.CharField(max_length=100,default='unknwn')
     #questid = models.ForeignKey(Quest,on_delete=models.CASCADE)
     status=models.CharField(max_length=1)
+    ques=models.CharField(max_length=100,default='unknwnquestion')
     def __str__(self):
         return self.answer
 class Comm(models.Model):

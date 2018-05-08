@@ -84,7 +84,7 @@
       	  <th>ANSWER ID</th>
         <th>ANSWER</th>
         <th>STATUS</th>
-         <th>QUEST ID</th>
+         <th>QUESTION</th>
       </tr>
     </thead>
     <tbody>
@@ -122,39 +122,7 @@
     </tbody>
   </table>
 
-<table class="table">
-    <thead>
-      <tr>
-      	  <th>QUEST ID</th>
-        <th>QUESTION</th>
- 
-      </tr>
-    </thead>
-    <tbody>
-        
-      <tr class="default">
 
-
-        <td>{%for i in st15%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
-
-	  <td>{%for i in st14%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
-	
-
-
-	
-        
-      </tr>
-      
-    </tbody>
-  </table>
 
 
 			<form  action="" method="post">{% csrf_token %}
