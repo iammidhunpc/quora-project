@@ -12,6 +12,7 @@ urlpatterns = [
     path('failed', views.FailedView.as_view(), name="failed"),
     path('answer', views.AnswerView.as_view(), name="answer"),
     path('admin', views.AdminView.as_view(), name="admin"),
+    path('adminlogin', views.LogAdminView.as_view(), name="adminlogin"),
     path('question_detail/<int:qid>/', views.AnswerView.as_view(), name="questiondetail"),
 
     path('answer_detail/<int:aid>/', views.CommentView.as_view(), name="answerdetail"),
@@ -24,7 +25,7 @@ urlpatterns = [
 
 
 
-    path('logout/', auth_views.LogoutView.as_view(next_page='/login/log'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/login/home'), name='logout'),
 
 
 

@@ -19,6 +19,15 @@ class LogForm(forms.Form):
 	password = forms.CharField(widget=forms.PasswordInput)
 	class Meta:
    		model = Logs
+class LogadminForm(forms.Form):
+
+	def __init__(self, *args, **kwargs):
+	 	super(LogadminForm, self).__init__(*args, **kwargs)
+	 	for field in self.fields.values():
+	 		field.widget.attrs = {'class': 'form-control'}
+	name = forms.CharField(widget=forms.TextInput(attrs={'class' : 'name'}),label='name', max_length=50)
+	password = forms.CharField(widget=forms.PasswordInput)
+
 
 class QuestForm(forms.Form):
 	ques=forms.CharField(max_length=100)

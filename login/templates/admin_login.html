@@ -53,13 +53,13 @@
 
 
              <li class="nav-item active">
-              <a style="font-weight: bold;" class="nav-link" href="/login/admin">Admin</a>
+              <a style="font-weight: bold;" class="nav-link" href="/login/adminlogin">Admin</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
- 
+
     <!-- Page Content -->
     <div class="container">
 
@@ -75,69 +75,27 @@
             <div class="card-body">
              	
 				        
-						<h1>ADMIN</h1> <hr>
 				
+				<form action="" method="post">
 
-<table class="table">
-    <thead>
-      <tr>
-      	  <th>ANSWER ID</th>
-        <th>ANSWER</th>
-        <th>STATUS</th>
-         <th>QUESTION</th>
-      </tr>
-    </thead>
-    <tbody>
-        
-      <tr class="default">
-      	 <td>{%for i in st10%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
+        {% csrf_token %}
+          <h1>LOGIN</h1> <hr>
+        <label>Username</label>
+      <input type="text" class="form-control" name="name"> <br>
+      <label>Password</label>
+      <input type="password" class="form-control" name="password">
 
-        <td>{%for i in st11%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
-	<td>{%for i in st12%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
+      <br>
+       <input type="submit" class="btn btn-success" value="Signin" /> <br> <br>
 
-	  <td>{%for i in st13%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
-	
+       <!-- <a href="/login/home"> 
+      <input type="button" class="btn btn-success" value="HOME" /> </a> <br> -->
 
+      </form>
 
-	
-        
-      </tr>
-      
-    </tbody>
-  </table>
-
-
-
-
-			<form  action="" method="post">{% csrf_token %}
-
-				<div class="form-group">
-			  		<label>Enter the answer id to approve an answer : </label>
-			  		<!-- <textarea class="form-control" rows="5" id="comment1" name="comment"></textarea> -->
-			  		<input class="form-control" type="number" name="statans">
-				</div>
-				<button type="submit" class="btn btn-success">Approve Answer</button>
-        <br><br>
-        <a style="color:red;text-align:right"   href="/login/logout">Logout </a>
-			</form>
-
-
+ {% for message in messages %}
+      {{ message }}
+    {% endfor %}
 
 
 

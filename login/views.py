@@ -76,6 +76,40 @@ class LogView(FormView):
             return HttpResponseRedirect('/login/log')
 
 
+class LogAdminView(FormView):
+    form_class = LogadminForm
+    template_name = 'admin_login.html'
+    def form_valid(self, form):
+        # nam1 = self.request.POST.get('nam')
+        # sid1 = self.request.POST.get('sid')
+        nam1= form.cleaned_data['name']
+        sid1 = form.cleaned_data['password']
+
+        user = authenticate(username=nam1, password=sid1)
+        print(nam1)
+        print(sid1)
+        print(user)
+        if user:
+            login(self.request,user)
+            # Is the account active? It could have been disabled.
+            if user.is_active:
+                if user.is_superuser:
+                    #obj=Register.objects.filter(name=nam1, password=sid1).exists()
+                    #if (obj==True):
+                    return HttpResponseRedirect('/login/admin')
+                 
+                else:
+                    return HttpResponseRedirect('/login/adminlogin')
+            else:
+                messages.add_message(self.request, messages.WARNING, 'Invalid username or password !')
+
+                return HttpResponseRedirect('/login/adminlogin')
+        else:
+            messages.add_message(self.request, messages.WARNING, 'Invalid username or password !')
+
+            return HttpResponseRedirect('/login/adminlogin')
+
+
 
 class SuccessView(FormView):
     template_name = 'success.html'
