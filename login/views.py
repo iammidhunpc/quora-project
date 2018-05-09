@@ -300,7 +300,7 @@ class DeleteView(generic.TemplateView):
                 q_obj.delete()
                 return HttpResponseRedirect('/login/success')
             else:
-                messages.add_message(self.request, messages.WARNING, 'You cannot delete other users question !')
+                messages.add_message(self.request, messages.WARNING, 'You cant delete other users question !')
                 return HttpResponseRedirect('/login/success')
 class DeleteansView(generic.TemplateView):
     template_name = 'success.html'
@@ -314,7 +314,7 @@ class DeleteansView(generic.TemplateView):
                 q_obj.delete()
                 return HttpResponseRedirect('/login/success')
             else:
-                messages.add_message(self.request, messages.WARNING, 'You cannot delete other users answer !')
+                messages.add_message(self.request, messages.WARNING, 'You cant delete other users answer !')
                 return HttpResponseRedirect('/login/success')
 
 
