@@ -25,6 +25,7 @@ class IndexView(FormView):
         obj.password = make_password( obj.password )
         form.save()
         return super().form_valid(form)
+
 class DisplayView(generic.TemplateView):
     template_name = 'view.html'
 
@@ -292,9 +293,15 @@ class DeleteView(generic.TemplateView):
     def dispatch(self, request, *args, **kwargs):
         context = super(DeleteView,self).get_context_data(**kwargs)
         did = self.kwargs['did']
+
         q_obj = Quest.objects.filter(id=did)
-        q_obj.delete()
-        return HttpResponseRedirect('/login/success')
+        for i in q_obj:
+            if (self.request.user.username == i.users):
+                q_obj.delete()
+                return HttpResponseRedirect('/login/success')
+            else:
+                messages.add_message(self.request, messages.WARNING, 'You cannot delete other users question !')
+                return HttpResponseRedirect('/login/success')
 class DeleteansView(generic.TemplateView):
     template_name = 'success.html'
     success_url='/login/success'
@@ -302,44 +309,13 @@ class DeleteansView(generic.TemplateView):
         context = super(DeleteansView,self).get_context_data(**kwargs)
         daid = self.kwargs['daid']
         q_obj = Ans.objects.filter(id=daid)
-        q_obj.delete()
-        return HttpResponseRedirect('/login/success')
+        for i in q_obj:
+            if (self.request.user.username == i.users):
+                q_obj.delete()
+                return HttpResponseRedirect('/login/success')
+            else:
+                messages.add_message(self.request, messages.WARNING, 'You cannot delete other users answer !')
+                return HttpResponseRedirect('/login/success')
 
-# register = template.Library()
 
-# @register.inclusion_tag('pagination.html')
-# def end_pagination(page, begin_pages=2, end_pages=2, before_current_pages=4, after_current_pages=4):
 
-#     before = max(page.number - before_current_pages - 1, 0)
-#     after = page.number + after_current_pages
-
-#     begin = page.paginator.page_range[:begin_pages]
-#     middle = page.paginator.page_range[before:after]
-#     end = page.paginator.page_range[-end_pages:]
-#     last_page_number = end[-1]
-
-#     def collides(firstlist, secondlist):
-   
-#         return any(item in secondlist for item in firstlist)
-
-    
-#     if collides(middle, end):
-#         end = range(max(last_page_number - before_current_pages - after_current_pages, 1), last_page_number + 1) #noqa
-#         middle = []
-
-  
-#     if collides(begin, middle):
-#         begin = range(1, min(before_current_pages + after_current_pages, last_page_number) + 1) #noqa
-#         middle = []
-
- 
-#     if collides(begin, end):
-#         begin = range(1, last_page_number + 1)
-#         end = []
-
-#     return {
-#             'page': page,
-#             'begin': begin,
-#             'middle': middle,
-#             'end': end
-#            }
