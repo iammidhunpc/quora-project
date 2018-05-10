@@ -16,15 +16,42 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item ">
-              <a style="font-weight: bold;" class="nav-link" href="/login/home">Login
 
-                <span class="sr-only">(current)</span>
+
+
+                  {% if request.user.is_superuser %}
+           <li>
+              <a style="font-weight: bold;" class="nav-link" href="/login/questap">Question Approval</a>
+            </li>
+              <li>
+              <a style="font-weight: bold;" class="nav-link" href="/login/ansap">Answer Approval</a>
+            </li>
+
+
+            {% endif %}
+
+
+                          {% if request.user.is_authenticated %}
+            <li class="nav-item ">
+              <a style="font-weight: bold;" class="nav-link" href="/login/logout">Logout
+
               </a>
             </li>
-                        <li class="nav-item ">
+
+                         {% else %}
+
+             <li class="nav-item ">
+              <a style="font-weight: bold;" class="nav-link" href="/login/log">Login
+
+              </a>
+            </li>
+
+                       <li class="nav-item">
               <a style="font-weight: bold;" class="nav-link" href="/login/index">Registration</a>
             </li>
-               <li class="nav-item">
+
+              {% endif %}
+        <!--        <li class="nav-item">
               <a style="font-weight: bold;" class="nav-link" href="/login/display">User Profiles</a>
             </li>
 
@@ -32,7 +59,7 @@
 
              <li class="nav-item active">
               <a style="font-weight: bold;" class="nav-link" href="/login/admin">Admin</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -91,6 +118,13 @@
 		<br><br>
 	{%endfor%}</td> 
 	
+<td>   {%for q in st10%}  <a href="{% url 'login:ansap1' statusansid=q %}" >Approve question</a>   <br><br>{%endfor%}
+
+    
+</td> 
+
+
+
 
 
 	
@@ -100,20 +134,6 @@
     </tbody>
   </table>
 
-
-
-
-			<form  action="" method="post">{% csrf_token %}
-
-				<div class="form-group">
-			  		<label>Enter the answer id to approve an answer : </label>
-			  		<!-- <textarea class="form-control" rows="5" id="comment1" name="comment"></textarea> -->
-			  		<input class="form-control" type="number" name="statans">
-				</div>
-				<button type="submit" class="btn btn-success">Approve Answer</button>
-        <br><br>
-        <a style="color:red;text-align:right"   href="/login/logout">Logout </a>
-			</form>
 
 
 

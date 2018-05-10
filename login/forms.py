@@ -15,8 +15,8 @@ class LogForm(forms.Form):
 	 	super(LogForm, self).__init__(*args, **kwargs)
 	 	for field in self.fields.values():
 	 		field.widget.attrs = {'class': 'form-control'}
-	name = forms.CharField(widget=forms.TextInput(attrs={'class' : 'name'}),label='name', max_length=50)
-	password = forms.CharField(widget=forms.PasswordInput)
+	name = forms.CharField(widget=forms.TextInput(attrs={'class' : 'name'}),label='name', max_length=50,required=False)
+	password = forms.CharField(widget=forms.PasswordInput,required=False)
 	class Meta:
    		model = Logs
 class LogadminForm(forms.Form):
@@ -30,7 +30,7 @@ class LogadminForm(forms.Form):
 
 
 class QuestForm(forms.Form):
-	ques=forms.CharField(max_length=100)
+	ques=forms.CharField(max_length=100,required=False)
 
 
 

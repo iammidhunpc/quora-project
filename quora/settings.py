@@ -68,6 +68,27 @@ TEMPLATES = [
     },
 ]
 
+
+
+EMAIL_USE_TLS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'anjitha.test@gmail.com'
+EMAIL_HOST_PASSWORD = 'password@1234'
+
+DEFAULT_FROM_EMAIL = 'anjitha.test@gmail.com'
+
+
+
+
+
+
+
+
 WSGI_APPLICATION = 'quora.wsgi.application'
 
 

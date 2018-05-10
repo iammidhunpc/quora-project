@@ -24,7 +24,7 @@
                         <li class="nav-item">
               <a style="font-weight: bold;" class="nav-link" href="/login/index">Registration</a>
             </li>
-               <li class="nav-item">
+       <!--         <li class="nav-item">
               <a style="font-weight: bold;" class="nav-link" href="/login/adminlogin">User Profiles</a>
             </li>
 
@@ -32,7 +32,7 @@
 
              <li class="nav-item">
               <a style="font-weight: bold;" class="nav-link" href="/login/adminlogin">Admin</a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -55,7 +55,10 @@
         	<form action="" method="post">
 
 				{% csrf_token %}
-					<h1>USER LOGIN</h1> <hr>
+
+       
+
+					<h1>LOGIN</h1> <hr>
 				<label>Username</label>
 			<input type="text" class="form-control" name="name"> <br>
 			<label>Password</label>
@@ -81,5 +84,4 @@
         </div>
     </div></div>
 <br><br>
-
 {% endblock %}

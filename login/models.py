@@ -9,6 +9,9 @@ from django.contrib.auth.models import AbstractUser
     #sid=models.CharField(max_length=8)
 class Register(AbstractUser):
     name = models.CharField(max_length=100)
+class Registration(models.Model):
+    user = models.ForeignKey(Register, on_delete=models.CASCADE)
+    key = models.CharField(max_length=100)
 
 class Logs(models.Model):
     name = models.CharField(max_length=100)
@@ -16,7 +19,7 @@ class Logs(models.Model):
 class Quest(models.Model):
     question = models.CharField(max_length=500)
     logid = models.CharField(max_length=500)
-    status=models.CharField(max_length=1)
+    status=models.CharField(max_length=50)
     users=models.CharField(max_length=100,default='unknwn')
 
     def __str__(self):
@@ -27,7 +30,7 @@ class Ans(models.Model):
     questid = models.CharField(max_length=100)
     users=models.CharField(max_length=100,default='unknwn')
     #questid = models.ForeignKey(Quest,on_delete=models.CASCADE)
-    status=models.CharField(max_length=1)
+    status=models.CharField(max_length=50)
     ques=models.CharField(max_length=100,default='unknwnquestion')
     def __str__(self):
         return self.answer
