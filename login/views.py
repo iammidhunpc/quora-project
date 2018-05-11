@@ -1,25 +1,27 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.http import HttpResponse
-from django.views import generic
+
 from .forms import *
 from .models import *
-from django.views.generic.edit import FormView
-from django.urls import reverse
-from django.contrib import messages
-from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.hashers import make_password
-from django.template.loader import render_to_string
-
 from django import template
+from django.urls import reverse
+from django.views import generic
 from django.template import loader
-
+from django.contrib import messages
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.http import HttpResponse
 from django.core.mail import send_mail
 from django.core.signing import Signer
-from django.contrib.auth.mixins import AccessMixin
 from login.mixin import ActiveOnlyMixin
+from django.http import HttpResponseRedirect
+from django.views.generic.edit import FormView
 from login.mixinadmin import ActiveOnlyMixinadmin
+from django.contrib.auth.mixins import AccessMixin
+from django.contrib.auth import authenticate, login
+from django.template.loader import render_to_string
+from django.contrib.auth.hashers import make_password
+
+
+
 # from django.contrib.auth.decorators import user_passes_test
 
 

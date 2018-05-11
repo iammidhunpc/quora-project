@@ -22,5 +22,6 @@ urlpatterns = [
 	path('login/', include('login.urls')),
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name="home"),
+    path(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
 ]
 

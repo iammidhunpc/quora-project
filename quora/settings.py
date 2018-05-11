@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
-    # 'social_django',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'quora.urls'
@@ -64,12 +65,53 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+
+                'social_django.context_processors.backends',  
+                'social_django.context_processors.login_redirect', 
             ],
         },
     },
 ]
 
+LOGIN_URL = 'login:log'
+LOGOUT_URL = 'login:logout'
+LOGIN_REDIRECT_URL = 'login:success'
 
+SOCIAL_AUTH_GITHUB_KEY = '71ec0dda2cdaccefa5b0'
+SOCIAL_AUTH_GITHUB_SECRET = '03d679e2090f9f8bcb0c2f3c86006126d3919267'
+
+
+
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '244385389458037'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '80e2cb6a4f29a9352281adfd35430887'
+
+
+SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.8'
+
+
+
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ='300857016299-omtn7s93vsuml8f3ja0v0aiacr41e4sf.apps.googleusercontent.com'  
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'nerrHkILv_KpXlNzlRt2j5TK'
+
+
+
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+     'social_core.backends.open_id.OpenIdAuth',  
+    'social_core.backends.google.GoogleOpenId',  
+    'social_core.backends.google.GoogleOAuth2', 
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 EMAIL_USE_TLS = True
 

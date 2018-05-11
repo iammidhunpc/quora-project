@@ -42,7 +42,7 @@ class ActiveOnlyMixin(AccessMixin):
     def handle_no_permission(self,request):
 
         ''' Overwrite to allow a message to be sent. '''
-        admin_url = ['/login/ansap','/login/questap']
+       
         message = self.get_permission_denied_message()
         if self.raise_exception:
             raise PermissionDenied(message)

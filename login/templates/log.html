@@ -71,6 +71,14 @@
 			<input type="button" class="btn btn-success" value="HOME" /> </a> <br> -->
 
 			</form>
+      <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
+      <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a><br>
+ 
+   <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a> <br>
+
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a><br>
+
+
 
  {% for message in messages %}
       {{ message }}
