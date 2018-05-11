@@ -6,7 +6,7 @@ from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 
-class ActiveOnlyMixin(AccessMixin):
+class ActiveOnlyMixinadmin(AccessMixin):
 
     '''
     A view mixin that only allows users that are active on the site.
@@ -56,4 +56,6 @@ class ActiveOnlyMixin(AccessMixin):
             return self.handle_no_permission(request)
         if not request.user.is_active:
             return self.handle_not_activated()
-        return super(ActiveOnlyMixin, self).dispatch(request, *args, **kwargs)
+        if not request.user.is_superuser:
+            return self.handle_no_permission(request)
+        return super(ActiveOnlyMixinadmin, self).dispatch(request, *args, **kwargs)

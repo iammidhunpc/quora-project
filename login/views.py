@@ -19,6 +19,16 @@ from django.core.mail import send_mail
 from django.core.signing import Signer
 from django.contrib.auth.mixins import AccessMixin
 from login.mixin import ActiveOnlyMixin
+from login.mixinadmin import ActiveOnlyMixinadmin
+# from django.contrib.auth.decorators import user_passes_test
+
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def score_reset(self,...):
+#     ...
+
+
 
 
 
@@ -41,6 +51,7 @@ class IndexView(FormView):
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.password = make_password( obj.password )
+        obj.is_active = False
         form.save()
 
         signer = Signer()
@@ -204,11 +215,11 @@ class HomeView(generic.TemplateView):
 
 
 
-class QuestapView(ActiveOnlyMixin,FormView):
+class QuestapView(ActiveOnlyMixinadmin,FormView):
     template_name = 'questap.html'
     form_class = ActForm
     success_url='questap'
-    permission_denied_message = 'You must be logged in to view this page'
+    permission_denied_message = 'Only admin can view this page'
     not_activated_message = 'You haven\'t activated your account yet'
     # You will need to implement this view
     not_activated_redirect = 'home'
@@ -250,11 +261,11 @@ class StatusView(FormView):
     # 		i.save()
     # 	return super().form_valid(form)
 
-class AnsapView(ActiveOnlyMixin,FormView):
+class AnsapView(ActiveOnlyMixinadmin,FormView):
     template_name = 'ansap.html'
     form_class = AnsstatForm
     success_url='ansap'
-    permission_denied_message = 'You must be logged in to view this page'
+    permission_denied_message = 'Only admin can view this page'
     not_activated_message = 'You haven\'t activated your account yet'
     # You will need to implement this view
     not_activated_redirect = 'home'
@@ -413,11 +424,15 @@ class RegistrationSuccess(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         key = self.kwargs.get("key")
         try:
+
             reg_obj = Registration.objects.get(key=key)
-            reg_obj.user.is_active = True
-            reg_obj.save()
+            #reg_obj.user.is_active = True
+            obj=Register.objects.get(id=reg_obj.user_id)
+            obj.is_active = True
+            obj.save()
             context = {'user': reg_obj, 'status': True}
             return self.render_to_response(context)
+
         except Registration.DoesNotExist:
             return self.render_to_response({'status': False})
 
