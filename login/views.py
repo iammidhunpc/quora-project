@@ -251,8 +251,12 @@ class StatusView(FormView):
 
         t = self.kwargs['statusid']
         obj3=Quest.objects.get(id=t)
-        obj3.status='Approved'
-        obj3.save()
+        if obj3.status == 'Approved':
+            messages.add_message(self.request, messages.WARNING, 'Q. %s  is already approved!'%(obj3.question))
+        else:
+            obj3.status='Approved'
+            obj3.save()
+            messages.add_message(self.request, messages.WARNING, 'Q. %s is approved !'%(obj3.question))
         return HttpResponseRedirect('/login/questap')
 
     # def form_valid(self, form):
@@ -299,8 +303,12 @@ class StatusAnsView(FormView):
 
         t = self.kwargs['statusansid']
         obj3=Ans.objects.get(id=t)
-        obj3.status='Approved'
-        obj3.save()
+        if obj3.status == 'Approved':
+            messages.add_message(self.request, messages.WARNING, 'Ans. %s  is already approved!'%(obj3.answer))
+        else:
+            obj3.status='Approved'
+            obj3.save()
+            messages.add_message(self.request, messages.WARNING, 'Ans. %s is approved!'%(obj3.answer))
         return HttpResponseRedirect('/login/ansap')     
         
 

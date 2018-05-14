@@ -1,14 +1,14 @@
 from django import forms
 from .models import *
-
-class NameForm(forms.ModelForm):
+from django.contrib.auth.forms import UserCreationForm 
+class NameForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
          super(NameForm, self).__init__(*args, **kwargs)
          for field in self.fields.values():
          	field.widget.attrs = {'class': 'form-control'}
     class Meta:
     	model = Register
-    	fields = ['name','email','password','username']
+    	fields = ['name','email','username']
 class LogForm(forms.Form):
 
 	def __init__(self, *args, **kwargs):
@@ -19,6 +19,8 @@ class LogForm(forms.Form):
 	password = forms.CharField(widget=forms.PasswordInput,required=False)
 	class Meta:
    		model = Logs
+
+   		
 class LogadminForm(forms.Form):
 
 	def __init__(self, *args, **kwargs):
