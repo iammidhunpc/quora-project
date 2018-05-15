@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'social_django',
     'sslserver',
     'login',
@@ -91,11 +90,11 @@ SOCIAL_AUTH_GITHUB_SECRET = '03d679e2090f9f8bcb0c2f3c86006126d3919267'
 
 
 
-SOCIAL_AUTH_FACEBOOK_KEY = '244385389458037'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '80e2cb6a4f29a9352281adfd35430887'
+SOCIAL_AUTH_FACEBOOK_KEY = '602805840082737'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c8f9b7cc04294ccd32d70303f020e2cd'
 
 #SOCIAL_AUTH_RAISE_EXCEPTIONS = False
-#SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.8'
+SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.8'
 
 
 

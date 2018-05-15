@@ -42,7 +42,7 @@
         <div class="list-group">   <p>Users Questions:</p>
                  {%for i in questions%}  
 			 
-		        <a href="{% url 'login:questiondetail' qid=i.id %}"> <b>{{i.question}}</b>
+		        <a href="{% url 'login:questiondetail' qid=i.id %}"> <b>Q.{{i.question}}</b> <br>
 	           	<br>
 	               {%endfor%}   </a>
 <!--             <a href="#" class="list-group-item">Category 2</a>

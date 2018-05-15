@@ -255,11 +255,11 @@ class StatusAnsView(FormView):
         t = self.kwargs['statusansid']
         obj3 = Ans.objects.get(id=t)
         if obj3.status == 'Approved':
-            messages.add_message(self.request, messages.WARNING, 'Answer %s  is already approved!' % (obj3.answer))
+            messages.add_message(self.request, messages.WARNING, 'Answer: %s  is already approved!' % (obj3.answer))
         else:
             obj3.status = 'Approved'
             obj3.save()
-            messages.add_message(self.request, messages.WARNING, 'Answer %s is approved!' % (obj3.answer))
+            messages.add_message(self.request, messages.WARNING, 'Answer: %s is approved!' % (obj3.answer))
         return HttpResponseRedirect('/login/ansap')
 
     # USER ANSWERS
