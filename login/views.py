@@ -28,10 +28,11 @@ class IndexView(FormView):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
+        # PASSWORD ENCRYPT
         obj.password = make_password(obj.password)
         obj.is_active = False
         form.save()
-
+        # EMAIL
         signer = Signer()
         signed_value = signer.sign(obj.email)
         key = ''.join(signed_value.split(':')[1:])
@@ -40,24 +41,6 @@ class IndexView(FormView):
         messages.add_message(self.request, messages.WARNING, 'Confirmation mail is send to your accout  !')
         send_mail("123", "123", 'anjitha.test@gmail.com', [obj.email], html_message=msg_html, fail_silently=False)
         return super().form_valid(form)
-
-
-# REGISTERED USERS LIST
-class DisplayView(generic.TemplateView):
-    template_name = 'view.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(DisplayView, self).get_context_data(**kwargs)
-
-        st4 = []
-        st5 = []
-        obj = Register.objects.all()
-        for i in obj:
-            st4.append(i.name)
-            st5.append(i.email)
-        context['st4'] = st4
-        context['st5'] = st5
-        return context
 
 
 # USER LOGIN
@@ -71,11 +54,8 @@ class LogView(FormView):
         sid1 = form.cleaned_data['password']
         obj1 = Logs.objects.create(name=nam1)
         obj1.save()
-
+        # USERNAME AND PASSWORD AUTHENTICATION
         user = authenticate(username=nam1, password=sid1)
-        print(nam1)
-        print(sid1)
-        print(user)
         if user:
             login(self.request, user)
             # Is the account active? It could have been disabled.
@@ -101,40 +81,6 @@ class HandleMix(AccessMixin):
         if not request.user.is_active:
             return self.handle_not_activated()
         return super(ActiveOnlyMixin, self).dispatch(request, *args, **kwargs)
-
-
-# ADMIN PAGE
-class LogAdminView(FormView):
-    form_class = LogadminForm
-    template_name = 'admin_login.html'
-
-    def form_valid(self, form):
-        nam1 = form.cleaned_data['name']
-        sid1 = form.cleaned_data['password']
-
-        user = authenticate(username=nam1, password=sid1)
-        print(nam1)
-        print(sid1)
-        print(user)
-        if user:
-            login(self.request, user)
-            # Is the account active? It could have been disabled.
-            if user.is_active:
-                if user.is_superuser:
-                    # obj=Register.objects.filter(name=nam1, password=sid1).exists()
-                    # if (obj==True):
-                    return HttpResponseRedirect('/login/admin')
-
-                else:
-                    return HttpResponseRedirect('/login/adminlogin')
-            else:
-                messages.add_message(self.request, messages.WARNING, 'Invalid username or password !')
-
-                return HttpResponseRedirect('/login/adminlogin')
-        else:
-            messages.add_message(self.request, messages.WARNING, 'Invalid username or password !')
-
-            return HttpResponseRedirect('/login/adminlogin')
 
 
 # HOME PAGE
@@ -181,20 +127,6 @@ class SuccessView(ActiveOnlyMixin, FormView):
             obj1 = Quest.objects.create(logid=logids, status='pending', question=q1, users=self.request.user.username)
             messages.add_message(self.request, messages.WARNING, 'Your question is pending moderation from the admin !')
         return super(SuccessView, self).form_valid(form)
-
-
-class FailedView(generic.TemplateView):
-    template_name = 'failed.html'
-
-
-class AdminView(generic.TemplateView):
-    template_name = 'admin_home.html'
-
-
-class HomeView(generic.TemplateView):
-    obj1 = Logs.objects.all()
-
-    template_name = 'home.html'
 
 
 # ADMIN QUESTION APPROVAL
@@ -389,7 +321,6 @@ class RegistrationSuccess(generic.TemplateView):
         try:
 
             reg_obj = Registration.objects.get(key=key)
-            # reg_obj.user.is_active = True
             obj = Register.objects.get(id=reg_obj.user_id)
             obj.is_active = True
             obj.save()
@@ -398,3 +329,69 @@ class RegistrationSuccess(generic.TemplateView):
 
         except Registration.DoesNotExist:
             return self.render_to_response({'status': False})
+
+
+# ADMIN PAGE
+class LogAdminView(FormView):
+    form_class = LogadminForm
+    template_name = 'admin_login.html'
+
+    def form_valid(self, form):
+        nam1 = form.cleaned_data['name']
+        sid1 = form.cleaned_data['password']
+
+        user = authenticate(username=nam1, password=sid1)
+        print(nam1)
+        print(sid1)
+        print(user)
+        if user:
+            login(self.request, user)
+            # Is the account active? It could have been disabled.
+            if user.is_active:
+                if user.is_superuser:
+                    # obj=Register.objects.filter(name=nam1, password=sid1).exists()
+                    # if (obj==True):
+                    return HttpResponseRedirect('/login/admin')
+
+                else:
+                    return HttpResponseRedirect('/login/adminlogin')
+            else:
+                messages.add_message(self.request, messages.WARNING, 'Invalid username or password !')
+
+                return HttpResponseRedirect('/login/adminlogin')
+        else:
+            messages.add_message(self.request, messages.WARNING, 'Invalid username or password !')
+
+            return HttpResponseRedirect('/login/adminlogin')
+
+
+# REGISTERED USERS LIST
+class DisplayView(generic.TemplateView):
+    template_name = 'view.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DisplayView, self).get_context_data(**kwargs)
+
+        st4 = []
+        st5 = []
+        obj = Register.objects.all()
+        for i in obj:
+            st4.append(i.name)
+            st5.append(i.email)
+        context['st4'] = st4
+        context['st5'] = st5
+        return context
+
+
+class FailedView(generic.TemplateView):
+    template_name = 'failed.html'
+
+
+class AdminView(generic.TemplateView):
+    template_name = 'admin_home.html'
+
+
+class HomeView(generic.TemplateView):
+    obj1 = Logs.objects.all()
+
+    template_name = 'home.html'
