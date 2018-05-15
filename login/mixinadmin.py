@@ -6,8 +6,8 @@ from django.contrib.auth.views import redirect_to_login
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 
-class ActiveOnlyMixinadmin(AccessMixin):
 
+class ActiveOnlyMixinadmin(AccessMixin):
     '''
     A view mixin that only allows users that are active on the site.
     '''
@@ -39,10 +39,10 @@ class ActiveOnlyMixinadmin(AccessMixin):
                 '{0}.get_not_activated_redirect().'.format(self.__class__.__name__))
         return self.not_activated_redirect
 
-    def handle_no_permission(self,request):
+    def handle_no_permission(self, request):
 
         ''' Overwrite to allow a message to be sent. '''
-        admin_url = ['/login/ansap','/login/questap']
+        admin_url = ['/login/ansap', '/login/questap']
         message = self.get_permission_denied_message()
         if self.raise_exception:
             raise PermissionDenied(message)
