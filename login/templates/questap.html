@@ -19,7 +19,7 @@
 
 
                     {% if request.user.is_superuser %}
-           <li >
+           <li class="nav-item active">
               <a style="font-weight: bold;" class="nav-link" href="/login/questap">Question Approval</a>
             </li>
               <li class="nav-item ">
@@ -71,7 +71,7 @@
   
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
+        <div class="col-lg-12">
 
           <div class="card mt-4">
           
@@ -82,7 +82,7 @@
 				<table class="table">
     <thead>
       <tr>
-      	  <th>QUEST ID</th>
+      	
         <th>QUESTION</th>
         
         
@@ -90,46 +90,35 @@
       </tr>
     </thead>
     <tbody>
-        
-      <tr class="default">
-      	 <td>{%for i in st8%}
-			 
-		{{i}} 
-		<br><br>
-	{%endfor%}</td> 
+        {%for i in question%}
+       <tr class="default">
 
-        <td>{%for i in st5%}
+        <td>
 			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
-	<td>{%for i in st6%}
+		        {{i.question}}
+		          <br><br>
+	           
+        </td> 
+	     <td>
 			   
-		{{i}} 
-		<br><br>
-	{%endfor%}</td> 
+		        {{i.status}} 
+		        <br><br>
+	     </td> 
 
 
-  <td>   {%for q in st8%}  <a href="{% url 'login:questap1' statusid=q %}" >Approve question</a>   <br><br>{%endfor%}
+       <td> 
+              <a href="{% url 'login:questap1' statusid=i.id %}" >Approve question</a>  
+
+               <br><br>
 
 		
-</td> 
+      </td> 
 	
 
 
-
-
-      <td>
-
- 
-
-    <br><br>
- </td> 
-  
-
-	
+     
         
-      </tr>
+      </tr>  {%endfor%}
       
     </tbody>
   </table>

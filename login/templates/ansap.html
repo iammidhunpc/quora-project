@@ -23,7 +23,7 @@
            <li>
               <a style="font-weight: bold;" class="nav-link" href="/login/questap">Question Approval</a>
             </li>
-              <li>
+              <li class="nav-item active">
               <a style="font-weight: bold;" class="nav-link" href="/login/ansap">Answer Approval</a>
             </li>
 
@@ -51,15 +51,7 @@
             </li>
 
               {% endif %}
-        <!--        <li class="nav-item">
-              <a style="font-weight: bold;" class="nav-link" href="/login/display">User Profiles</a>
-            </li>
 
-
-
-             <li class="nav-item active">
-              <a style="font-weight: bold;" class="nav-link" href="/login/admin">Admin</a>
-            </li> -->
           </ul>
         </div>
       </div>
@@ -73,7 +65,7 @@
   
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
+        <div class="col-lg-12">
 
           <div class="card mt-4">
           
@@ -83,53 +75,49 @@
 						<h1>ADMIN</h1> <hr>
 				
 
-<table class="table">
-    <thead>
-      <tr>
-      	  <th>ANSWER ID</th>
-        <th>ANSWER</th>
-        <th>STATUS</th>
-         <th>QUESTION</th>
-      </tr>
-    </thead>
+  <table class="table">
+            <thead>
+           <tr>
+      	
+                <th>QUESTION</th>
+                <th>ANSWER</th>
+                   <th>STATUS</th>
+          </tr>
+            </thead>
     <tbody>
-        
-      <tr class="default">
-      	 <td>{%for i in st10%}
+          {% for i in answer %}
+               
+          <tr class="default">
+            
+                 <td>
 			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
+          		       {{i.ques}}
+                     
+          		      <br><br>
+          	
+                 </td> 
+	                <td>
+			 
+            		          {{i.answer}}
+            		        <br><br>
+            	   </td> 
 
-        <td>{%for i in st11%}
+	               <td>
 			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
-	<td>{%for i in st12%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
-
-	  <td>{%for i in st13%}
-			 
-		{{i}}
-		<br><br>
-	{%endfor%}</td> 
+        		          {{i.status}}
+        		      <br><br>
+        	     </td> 
 	
-<td>   {%for q in st10%}  <a href="{% url 'login:ansap1' statusansid=q %}" >Approve question</a>   <br><br>{%endfor%}
+               <td>   
+                      <a href="{% url 'login:ansap1' statusansid=i.id %}" >Approve answer</a>   
+                      <br><br>
 
     
-</td> 
+              </td> 
 
-
-
-
-
-	
-        
-      </tr>
+    
+           </tr>
+        {% endfor %}
       
     </tbody>
   </table>
