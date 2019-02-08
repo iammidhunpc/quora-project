@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y7^%1&ys16p0a&3wpp74wmg%_eu*g-3(#n(-2&3goo^2ue9q*8'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,14 +84,14 @@ TEMPLATES = [
 
 
 
-SOCIAL_AUTH_GITHUB_KEY = '71ec0dda2cdaccefa5b0'
-SOCIAL_AUTH_GITHUB_SECRET = '03d679e2090f9f8bcb0c2f3c86006126d3919267'
+SOCIAL_AUTH_GITHUB_KEY = ''
+SOCIAL_AUTH_GITHUB_SECRET = ''
 
 
 
 
-SOCIAL_AUTH_FACEBOOK_KEY = '602805840082737'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'c8f9b7cc04294ccd32d70303f020e2cd'
+SOCIAL_AUTH_FACEBOOK_KEY = ''  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
 
 #SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.8'
@@ -121,10 +121,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'anjitha.test@gmail.com'
-EMAIL_HOST_PASSWORD = 'password@1234'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
-DEFAULT_FROM_EMAIL = 'anjitha.test@gmail.com'
+DEFAULT_FROM_EMAIL = ''
 
 
 
